@@ -11,22 +11,37 @@ window.onload = function(){
     let count3 = 0;
 
     btn1.addEventListener("click", increaseValue1);
+    
     btn2.addEventListener("click", increaseValue2);
+    btn2.addEventListener("click", decreaseValue1); 
+
     btn3.addEventListener("click", increaseValue3);
+    btn3.addEventListener("click", decreaseValue2);
 
     function increaseValue1 () {
-        count1 += 1
+        count1 += 1;
         value1.innerHTML = count1;
     }
 
     function increaseValue2 (){
-        count2 += 1
+        count2 += 1;
         value2.innerHTML = count2;
     }
 
     function increaseValue3 (){
-        count3 += 1
+        count3 += 1;
         value3.innerHTML = count3;
+    }
+
+    function decreaseValue1 (){
+        count1 -= 1;
+        value1.innerHTML = count1;
+    }
+
+    function decreaseValue2 (){
+        count2 -= 1;
+        value2.innerHTML = count2;
+
     }
 
 }
