@@ -42,7 +42,7 @@ window.onload = function(){
     devBtn.addEventListener("click", increasedevValue);
 
     function increasemoneyValue () {
-        if(foodCount - 9 > 0){
+        if(foodCount - foodSellQty >= 0){
         moneyCount += foodSellVal;
         moneyValue.innerHTML = moneyCount;
         foodCount -= foodSellQty;
@@ -51,7 +51,7 @@ window.onload = function(){
     }
 
     function increasefoodValue () {
-        if(moneyCount - 9 > 0){
+        if(moneyCount - foodBuyVal >= 0){
         foodCount += foodBuyQty;
         foodValue.innerHTML = foodCount;
         moneyCount -= foodBuyVal;
@@ -60,7 +60,7 @@ window.onload = function(){
     }
 
     function increasepopValue (){
-        if(foodCount - 10 >= 0){
+        if(foodCount - foodConsumeVal >= 0){
         popCount += popIncVal;
         popValue.innerHTML = popCount;
         foodCount -= foodConsumeVal;
@@ -69,13 +69,15 @@ window.onload = function(){
     }
 
     function increasedevValue (){
-        if(moneyCount - 10 >= 0){
+        if(moneyCount - goldSpendVal >= 0){
         devCount += devIncVal;
         devValue.innerHTML = devCount;
         moneyCount -= goldSpendVal;
         moneyValue.innerHTML = moneyCount;}
-        else(alert("Not enough gold to increase development!"))
+        else{alert("Not enough gold to increase development!")};
     }
+
+    let goldUpgradeCost = 50;
 
     goldUpgradeBtn.addEventListener("click", activateGoldUpgrade);
 
@@ -86,19 +88,25 @@ window.onload = function(){
     devUpgradeBtn.addEventListener("click", activateDevUpgrade);
 
     function activateGoldUpgrade () {
-        alert("gold upgrade")
+        if(moneyCount - goldUpgradeCost >= 0) {
+            moneyCount -= goldUpgradeCost;
+            foodSellVal *= 1.5;
+            goldUpgradeCost *= 2;
+            moneyValue.innerHTML = moneyCount;
+        }
+        else {alert("Not enough gold!")};
     }
 
     function activateFoodUpgrade () {
-        alert("food upgrade")
+        alert("Not enough gold!")
     }
 
     function activatePopUpgrade () {
-        alert("pop upgrade")
+        alert("Not enough gold!")
     }
 
     function activateDevUpgrade () {
-        alert("dev upgrade")
+        alert("Not enough gold!")
     }
 
 
