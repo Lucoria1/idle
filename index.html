@@ -3,32 +3,70 @@
     <head>
         <meta charset="UTF-8">
         <title>Idle Test Project</title>
+        <link rel="stylesheet" href="sheetstyle.css">
         
     </head>
     <body>
         <div>
-            <h1>Silly Game Title</h1>
+            <h1 class="title">Silly Game Title</h1>
         </div>
 
-        <div id="valueCont">
+        <div class="upperCont">
 
-            <h3 class="moneyValue"></h3>
-            <h3 class="foodValue"></h3>
-            <h3 class="popValue"></h3>
-            <h3 class="devValue"></h3>
-            
-        </div>
-        
-        <div id="buttonCont">
-            <button class="moneyBtn">Gold</button>
-            <button class="foodBtn">Food</button>
-            <button class="popBtn">Population</button>
-            <button class="devBtn">Development</button>
+            <div class="outerCont">
+
+                <div class="valueCont">
+                    <h3 class="moneyTag tag">Gold: </h3>
+                    <h3 class="moneyValue value"></h3>
+                </div>
+
+                <div class="btnCont">
+                    <button class="moneyBtn">Gold</button>
+                </div>
+
+            </div>
+
+            <div class="outerCont">
+
+                <div class="valueCont">
+                    <h3 class="foodTag tag">Food: </h3>
+                    <h3 class="foodValue value"></h3>
+                </div>
+
+                <div class="btnCont">
+                    <button class="foodBtn">Food</button>
+                </div>
+                
+            </div>
+
+            <div class="outerCont">
+
+                <div class="valueCont">
+                    <h3 class="popTag tag">Population: </h3>
+                    <h3 class="popValue value"></h3>
+                </div>
+
+                <div class="btnCont">
+                    <button class="popBtn">Population</button>
+                </div>
+
+            </div>
+
+            <div class="outerCont">
+
+                <div class="valueCont">
+                    <h3 class="devTag tag">Development: </h3>
+                    <h3 class="devValue value"></h3>
+                </div>
+
+                <div class="btnCont">
+                    <button class="devBtn">Development</button>
+                </div>
+
+            </div>
+
         </div>
 
-        <div id="energyCont">
-
-        </div>
     </body>
 
     <script src="idle.js"></script>

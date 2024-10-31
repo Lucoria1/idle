@@ -1,0 +1,21 @@
+.title {
+    display: flex;
+    justify-content: center;
+}
+
+
+
+.upperCont {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.valueCont {
+    display:flex;
+    justify-content: space-evenly;
+}
+
+.btnCont {
+    display:flex;
+    justify-content: center;
+}
