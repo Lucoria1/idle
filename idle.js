@@ -1,46 +1,47 @@
 window.onload = function(){
-    let value1 = document.querySelector(".value1");
-    let value2 = document.querySelector(".value2");
-    let value3 = document.querySelector(".value3");
-    let btn1 = document.querySelector(".btn1");
-    let btn2 = document.querySelector(".btn2");
-    let btn3 = document.querySelector(".btn3");
+    let moneyValue = document.querySelector(".moneyValue");
+    let popValue = document.querySelector(".popValue");
+    let devValue = document.querySelector(".devValue");
+
+    let moneyBtn = document.querySelector(".moneyBtn");
+    let popBtn = document.querySelector(".popBtn");
+    let devBtn = document.querySelector(".devBtn");
 
     let count1 = 0;
     let count2 = 0;
     let count3 = 0;
 
-    btn1.addEventListener("click", increaseValue1);
+    moneyBtn.addEventListener("click", increasemoneyValue);
     
-    btn2.addEventListener("click", increaseValue2);
-    btn2.addEventListener("click", decreaseValue1); 
+    popBtn.addEventListener("click", increasepopValue);
+    popBtn.addEventListener("click", decreasemoneyValue); 
 
-    btn3.addEventListener("click", increaseValue3);
-    btn3.addEventListener("click", decreaseValue2);
+    devBtn.addEventListener("click", increasedevValue);
+    devBtn.addEventListener("click", decreasepopValue);
 
-    function increaseValue1 () {
+    function increasemoneyValue () {
         count1 += 1;
-        value1.innerHTML = count1;
+        moneyValue.innerHTML = count1;
     }
 
-    function increaseValue2 (){
-        count2 += 1;
-        value2.innerHTML = count2;
+    function increasepopValue (){
+        count2 += 0.5;
+        popValue.innerHTML = count2;
     }
 
-    function increaseValue3 (){
-        count3 += 1;
-        value3.innerHTML = count3;
+    function increasedevValue (){
+        count3 += 0.25;
+        devValue.innerHTML = count3;
     }
 
-    function decreaseValue1 (){
+    function decreasemoneyValue (){
         count1 -= 1;
-        value1.innerHTML = count1;
+        moneyValue.innerHTML = count1;
     }
 
-    function decreaseValue2 (){
+    function decreasepopValue (){
         count2 -= 1;
-        value2.innerHTML = count2;
+        popValue.innerHTML = count2;
 
     }
 
