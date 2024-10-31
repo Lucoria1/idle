@@ -9,6 +9,11 @@ window.onload = function(){
     let popBtn = document.querySelector(".popBtn");
     let devBtn = document.querySelector(".devBtn");
 
+    let goldUpgradeValue = document.querySelector(".goldUpgradeValue");
+    let foodUpgradeValue = document.querySelector(".foodUpgradeValue");
+    let popUpgradeValue = document.querySelector(".popUpgradeValue");
+    let devUpgradeValue = document.querySelector(".devUpgradeValue");
+
     let goldUpgradeBtn = document.querySelector(".goldUpgrade");
     let foodUpgradeBtn = document.querySelector(".foodUpgrade");
     let popUpgradeBtn = document.querySelector(".popUpgrade");
@@ -78,6 +83,16 @@ window.onload = function(){
     }
 
     let goldUpgradeCost = 50;
+    goldUpgradeValue.innerHTML = goldUpgradeCost;
+
+    let foodUpgradeCost = 50;
+    foodUpgradeValue.innerHTML = foodUpgradeCost;
+
+    let popUpgradeCost = 50;
+    popUpgradeValue.innerHTML = popUpgradeCost;
+
+    let devUpgradeCost = 50;
+    devUpgradeValue.innerHTML = devUpgradeCost;
 
     goldUpgradeBtn.addEventListener("click", activateGoldUpgrade);
 
@@ -93,13 +108,44 @@ window.onload = function(){
             foodSellVal *= 1.5;
             goldUpgradeCost *= 2;
             moneyValue.innerHTML = moneyCount;
+            goldUpgradeValue.innerHTML = goldUpgradeCost;
         }
         else {alert("Not enough gold!")};
     }
 
     function activateFoodUpgrade () {
-        alert("Not enough gold!")
+        if(moneyCount - foodUpgradeCost >= 0) {
+            moneyCount -= foodUpgradeCost;
+            foodSellVal *= 1.5;
+            foodUpgradeCost *= 2;
+            moneyValue.innerHTML = moneyCount;
+            foodUpgradeValue.innerHTML = foodUpgradeCost;
+        }
+        else {alert("Not enough gold!")};
     }
+
+    function activateGoldUpgrade () {
+        if(moneyCount - goldUpgradeCost >= 0) {
+            moneyCount -= goldUpgradeCost;
+            foodSellVal *= 1.5;
+            goldUpgradeCost *= 2;
+            moneyValue.innerHTML = moneyCount;
+            goldUpgradeValue.innerHTML = goldUpgradeCost;
+        }
+        else {alert("Not enough gold!")};
+    }
+
+    function activateGoldUpgrade () {
+        if(moneyCount - goldUpgradeCost >= 0) {
+            moneyCount -= goldUpgradeCost;
+            foodBuyQty *= 1.5;
+            goldUpgradeCost *= 2;
+            moneyValue.innerHTML = moneyCount;
+            goldUpgradeValue.innerHTML = goldUpgradeCost;
+        }
+        else {alert("Not enough gold!")};
+    }
+
 
     function activatePopUpgrade () {
         alert("Not enough gold!")
