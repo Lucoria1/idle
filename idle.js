@@ -1,17 +1,22 @@
 window.onload = function(){
     let moneyValue = document.querySelector(".moneyValue");
+    let foodValue = document.querySelector(".foodValue");
     let popValue = document.querySelector(".popValue");
     let devValue = document.querySelector(".devValue");
 
     let moneyBtn = document.querySelector(".moneyBtn");
+    let foodBtn = document.querySelector(".foodBtn")
     let popBtn = document.querySelector(".popBtn");
     let devBtn = document.querySelector(".devBtn");
 
-    let count1 = 0;
-    let count2 = 0;
-    let count3 = 0;
+    let moneyCount = 0;
+    let foodCount = 0;
+    let popCount = 0;
+    let devCount = 0;
 
     moneyBtn.addEventListener("click", increasemoneyValue);
+
+    foodBtn.addEventListener("click", increasefoodValue)
     
     popBtn.addEventListener("click", increasepopValue);
     popBtn.addEventListener("click", decreasemoneyValue); 
@@ -20,29 +25,43 @@ window.onload = function(){
     devBtn.addEventListener("click", decreasepopValue);
 
     function increasemoneyValue () {
-        count1 += 1;
-        moneyValue.innerHTML = count1;
-    }
-
-    function increasepopValue (){
-        count2 += 0.5;
-        popValue.innerHTML = count2;
-    }
-
-    function increasedevValue (){
-        count3 += 0.25;
-        devValue.innerHTML = count3;
+        moneyCount += 1;
+        moneyValue.innerHTML = moneyCount;
     }
 
     function decreasemoneyValue (){
-        count1 -= 1;
-        moneyValue.innerHTML = count1;
+        foodCount -= 1;
+        foodValue.innerHTML = foodCount;
+    }
+
+    function increasefoodValue () {
+        foodCount += 1;
+        foodValue.innerHTML = foodCount;
+    }
+
+    function decreasefoodValue (){
+        moneyCount -= 1;
+        moneyValue.innerHTML = moneyCount;
+    }
+
+    function increasepopValue (){
+        popCount += 0.5;
+        popValue.innerHTML = popCount;
     }
 
     function decreasepopValue (){
-        count2 -= 1;
-        popValue.innerHTML = count2;
+        popCount -= 1;
+        popValue.innerHTML = popCount;
 
     }
+
+    function increasedevValue (){
+        devCount += 0.25;
+        devValue.innerHTML = devCount;
+    }
+
+   
+
+    
 
 }
