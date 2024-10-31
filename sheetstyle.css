@@ -3,13 +3,18 @@
     justify-content: center;
 }
 
+.wholeCont {
+    display: flex;
+    flex-direction: column;
+}
+
 .outerCont {
     display: flex;
     flex-direction: column;
     padding: 10px;
     width: 120px;
+    justify-content: space-evenly;
 }
-
 
 .upperCont {
     display: flex;
@@ -32,4 +37,13 @@
     justify-content: center;
     flex-grow: 1;
     text-align: center;
+}
+
+.lowerCont {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.upgradeCont{
+    display: flex;
 }
