@@ -3,6 +3,12 @@
     justify-content: center;
 }
 
+.outerCont {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    width: 120px;
+}
 
 
 .upperCont {
@@ -18,4 +24,12 @@
 .btnCont {
     display:flex;
     justify-content: center;
+    flex-grow: 1;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+    text-align: center;
 }

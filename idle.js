@@ -25,31 +25,39 @@ window.onload = function(){
     devBtn.addEventListener("click", increasedevValue);
 
     function increasemoneyValue () {
+        if(foodCount - 9 > 0){
         moneyCount += 10;
         moneyValue.innerHTML = moneyCount;
         foodCount -= 9;
-        foodValue.innerHTML = foodCount;
+        foodValue.innerHTML = foodCount;}
+        else{alert("Not enough food to sell!")}
     }
 
     function increasefoodValue () {
+        if(moneyCount - 9 > 0){
         foodCount += 10;
         foodValue.innerHTML = foodCount;
         moneyCount -= 9;
-        moneyValue.innerHTML = moneyCount;
+        moneyValue.innerHTML = moneyCount;}
+        else{alert("Not enough gold to buy food!")}
     }
 
     function increasepopValue (){
+        if(foodCount - 10 >= 0){
         popCount += 1;
         popValue.innerHTML = popCount;
         foodCount -= 10;
-        foodValue.innerHTML = foodCount;
+        foodValue.innerHTML = foodCount;}
+        else{alert("Not enough food for the people!")}
     }
 
     function increasedevValue (){
+        if(moneyCount - 10 >= 0){
         devCount += 1;
         devValue.innerHTML = devCount;
         moneyCount -=10;
-        moneyValue.innerHTML = moneyCount;
+        moneyValue.innerHTML = moneyCount;}
+        else(alert("Not enough gold to increase development!"))
     }
 
    
