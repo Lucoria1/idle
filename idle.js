@@ -9,55 +9,47 @@ window.onload = function(){
     let popBtn = document.querySelector(".popBtn");
     let devBtn = document.querySelector(".devBtn");
 
-    let moneyCount = 0;
+    let moneyCount = 10;
     let foodCount = 0;
     let popCount = 0;
     let devCount = 0;
+
+    moneyValue.innerHTML = moneyCount;
 
     moneyBtn.addEventListener("click", increasemoneyValue);
 
     foodBtn.addEventListener("click", increasefoodValue)
     
     popBtn.addEventListener("click", increasepopValue);
-    popBtn.addEventListener("click", decreasemoneyValue); 
 
     devBtn.addEventListener("click", increasedevValue);
-    devBtn.addEventListener("click", decreasepopValue);
 
     function increasemoneyValue () {
-        moneyCount += 1;
+        moneyCount += 10;
         moneyValue.innerHTML = moneyCount;
-    }
-
-    function decreasemoneyValue (){
-        foodCount -= 1;
+        foodCount -= 9;
         foodValue.innerHTML = foodCount;
     }
 
     function increasefoodValue () {
-        foodCount += 1;
+        foodCount += 10;
         foodValue.innerHTML = foodCount;
-    }
-
-    function decreasefoodValue (){
-        moneyCount -= 1;
+        moneyCount -= 9;
         moneyValue.innerHTML = moneyCount;
     }
 
     function increasepopValue (){
-        popCount += 0.5;
+        popCount += 1;
         popValue.innerHTML = popCount;
-    }
-
-    function decreasepopValue (){
-        popCount -= 1;
-        popValue.innerHTML = popCount;
-
+        foodCount -= 10;
+        foodValue.innerHTML = foodCount;
     }
 
     function increasedevValue (){
-        devCount += 0.25;
+        devCount += 1;
         devValue.innerHTML = devCount;
+        moneyCount -=10;
+        moneyValue.innerHTML = moneyCount;
     }
 
    
