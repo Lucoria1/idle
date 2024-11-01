@@ -58,3 +58,7 @@
     justify-content: center;
     flex-grow: 1;
 }
+
+.exchangeCont {
+    height: 80px;
+}

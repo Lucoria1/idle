@@ -9,6 +9,11 @@ window.onload = function(){
     let popBtn = document.querySelector(".popBtn");
     let devBtn = document.querySelector(".devBtn");
 
+    let exchangeFoodValue = document.querySelector(".exchangeFoodValue");
+    let exchangeMoneyValue = document.querySelector(".exchangeMoneyValue");
+    let exchangePopValue = document.querySelector(".exchangePopValue");
+    let exchangeDevValue = document.querySelector(".exchangeDevValue");
+
     let goldUpgradeValue = document.querySelector(".goldUpgradeValue");
     let foodUpgradeValue = document.querySelector(".foodUpgradeValue");
     let popUpgradeValue = document.querySelector(".popUpgradeValue");
@@ -19,7 +24,7 @@ window.onload = function(){
     let popUpgradeBtn = document.querySelector(".popUpgrade");
     let devUpgradeBtn = document.querySelector(".devUpgrade");
 
-    let moneyCount = 10;
+    let moneyCount = 100;
     let foodCount = 0;
     let popCount = 0;
     let devCount = 0;
@@ -38,9 +43,14 @@ window.onload = function(){
 
     moneyValue.innerHTML = moneyCount;
 
+    exchangeMoneyValue.innerHTML = `Sell ${foodSellQty} food for ${foodSellVal} gold`;
+    exchangeFoodValue.innerHTML = `Buy ${foodBuyQty} food for ${foodBuyVal} gold`;
+    exchangePopValue.innerHTML = `Increase Population by ${popIncVal} for ${foodConsumeVal} food`;
+    exchangeDevValue.innerHTML = `Increase Development by ${devIncVal} for ${goldSpendVal} gold`;
+
     moneyBtn.addEventListener("click", increasemoneyValue);
 
-    foodBtn.addEventListener("click", increasefoodValue)
+    foodBtn.addEventListener("click", increasefoodValue);
     
     popBtn.addEventListener("click", increasepopValue);
 
@@ -109,6 +119,7 @@ window.onload = function(){
             goldUpgradeCost *= 2;
             moneyValue.innerHTML = moneyCount;
             goldUpgradeValue.innerHTML = goldUpgradeCost;
+            exchangeMoneyValue.innerHTML = `Sell ${foodSellQty} food for ${foodSellVal} gold`;
         }
         else {alert("Not enough gold!")};
     }
@@ -116,45 +127,38 @@ window.onload = function(){
     function activateFoodUpgrade () {
         if(moneyCount - foodUpgradeCost >= 0) {
             moneyCount -= foodUpgradeCost;
-            foodSellVal *= 1.5;
+            foodBuyQty *= 1.5;
             foodUpgradeCost *= 2;
             moneyValue.innerHTML = moneyCount;
             foodUpgradeValue.innerHTML = foodUpgradeCost;
+            exchangeFoodValue.innerHTML = `Buy ${foodBuyQty} food for ${foodBuyVal} gold`;
         }
         else {alert("Not enough gold!")};
     }
-
-    function activateGoldUpgrade () {
-        if(moneyCount - goldUpgradeCost >= 0) {
-            moneyCount -= goldUpgradeCost;
-            foodSellVal *= 1.5;
-            goldUpgradeCost *= 2;
-            moneyValue.innerHTML = moneyCount;
-            goldUpgradeValue.innerHTML = goldUpgradeCost;
-        }
-        else {alert("Not enough gold!")};
-    }
-
-    function activateGoldUpgrade () {
-        if(moneyCount - goldUpgradeCost >= 0) {
-            moneyCount -= goldUpgradeCost;
-            foodBuyQty *= 1.5;
-            goldUpgradeCost *= 2;
-            moneyValue.innerHTML = moneyCount;
-            goldUpgradeValue.innerHTML = goldUpgradeCost;
-        }
-        else {alert("Not enough gold!")};
-    }
-
 
     function activatePopUpgrade () {
-        alert("Not enough gold!")
+        if(moneyCount - popUpgradeCost >= 0) {
+            moneyCount -= popUpgradeCost;
+            popIncVal *= 1.5;
+            popUpgradeCost *= 2;
+            moneyValue.innerHTML = moneyCount;
+            popUpgradeValue.innerHTML = goldUpgradeCost;
+            exchangePopValue.innerHTML = `Increase Population by ${popIncVal} for ${foodConsumeVal} food`;        
+        }
+        else {alert("Not enough gold!")};
     }
 
     function activateDevUpgrade () {
-        alert("Not enough gold!")
+        if(moneyCount - devUpgradeCost >= 0) {
+            moneyCount -= devUpgradeCost;
+            devIncVal *= 1.5;
+            devUpgradeCost *= 2;
+            moneyValue.innerHTML = moneyCount;
+            devUpgradeValue.innerHTML = goldUpgradeCost;
+            exchangeDevValue.innerHTML = `Increase Development by ${devIncVal} for ${goldSpendVal} gold`;
+        }
+        else {alert("Not enough gold!")};
     }
-
 
 
 
