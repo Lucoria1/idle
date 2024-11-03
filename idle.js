@@ -38,7 +38,7 @@ window.onload = function(){
     let devUpgradeBtn = document.querySelector(".devUpgrade");
     let devCostUpgradeBtn = document.querySelector(".devCostUpgrade");
 
-    let moneyCount = 10;
+    let moneyCount = 100000;
     let foodCount = 0;
     let popCount = 0;
     let devCount = 0;
@@ -98,6 +98,7 @@ window.onload = function(){
         popCount = Number(popCount.toFixed(2));
         popValue.innerHTML = popCount;
         foodCount -= foodConsumeVal;
+        foodCount = Number(foodCount.toFixed(2));
         foodValue.innerHTML = foodCount;}
         else{alert("Not enough food for the people!")}
     }
@@ -207,6 +208,8 @@ window.onload = function(){
             moneyCount = Number(moneyCount.toFixed(2));
             foodSellQty *= 1.5;
             foodSellQty = Number(foodSellQty.toFixed(2));
+            foodSellVal *= 1.5;
+            foodSellVal = Number(foodSellVal.toFixed(2));
             qtyUpgradeCost *= 2;
             moneyValue.innerHTML = moneyCount;
             qtyUpgradeValue.innerHTML = qtyUpgradeCost;
@@ -222,9 +225,14 @@ window.onload = function(){
             moneyCount = Number(moneyCount.toFixed(2));
             foodBuyVal *= 0.5;
             foodBuyVal = Number(foodBuyVal.toFixed(2));
-            costUpgradeCost *= 2;
+
+                if(foodBuyVal === 0.01){
+                    costUpgradeValue.innerHTML = "MAX"
+                } else {
+                costUpgradeCost *= 2;
+                costUpgradeValue.innerHTML = costUpgradeCost;}
+
             moneyValue.innerHTML = moneyCount;
-            costUpgradeValue.innerHTML = costUpgradeCost;
             exchangeFoodValue.innerHTML = `Buy ${foodBuyQty} food for ${foodBuyVal} gold`;
         } else if (moneyCount - costUpgradeCost >=0 && foodBuyVal === 0.01) {
             alert("It can't get any cheaper!")
@@ -238,9 +246,14 @@ window.onload = function(){
             moneyCount = Number(moneyCount.toFixed(2));
             foodConsumeVal *= 0.5;
             foodConsumeVal = Number(foodConsumeVal.toFixed(2));
-            popQtyUpgradeCost *= 2;
+
+                if(foodConsumeVal === 0.01){
+                    popQtyUpgradeValue.innerHTML = "MAX"
+                } else {
+                popQtyUpgradeCost *= 2;
+                popQtyUpgradeValue.innerHTML= popQtyUpgradeCost;}
+
             moneyValue.innerHTML = moneyCount;
-            popQtyUpgradeValue.innerHTML= popQtyUpgradeCost;
             exchangePopValue.innerHTML = `Increase Population by ${popIncVal} for ${foodConsumeVal} food`;
         } else if(moneyCount - popQtyUpgradeCost >= 0 && foodConsumeVal === 0.01){
             alert("It can't get any cheaper!")
@@ -253,9 +266,15 @@ window.onload = function(){
             moneyCount = Number(moneyCount.toFixed(2));
             goldSpendVal *= 0.5;
             goldSpendVal = Number(goldSpendVal.toFixed(2));
-            devCostUpgradeCost *= 2;
+
+                if(goldSpendVal === 0.01){
+                    devCostUpgradeValue.innerHTML = "MAX"
+                } else {
+                    devCostUpgradeCost *= 2;
+                    devCostUpgradeValue.innerHTML = devCostUpgradeCost;
+                }
+            
             moneyValue.innerHTML = moneyCount;
-            devCostUpgradeValue.innerHTML = devCostUpgradeCost;
             exchangeDevValue.innerHTML = `Increase Development by ${devIncVal} for ${goldSpendVal} gold`;
         } else if (moneyCount - devCostUpgradeCost >= 0 && goldSpendVal === 0.01){
             alert("It can't get any cheaper!");
