@@ -28,9 +28,12 @@ document.addEventListener("DOMContentLoaded", () => {
     let costUpgradeSecondValue = document.querySelector(".costUpgradeSecondValue");
 
     let popUpgradeValue = document.querySelector(".popUpgradeValue");
-    let popQtyUpgradeValue = document.querySelector(".popQtyUpgradeValue")
+    let popUpgradeSecondValue = document.querySelector(".popUpgradeSecondValue");
+    let popQtyUpgradeValue = document.querySelector(".popQtyUpgradeValue");
+    let popQtyUpgradeSecondValue = document.querySelector(".popQtyUpgradeSecondValue");
 
     let devUpgradeValue = document.querySelector(".devUpgradeValue");
+    let devUpgradeSecondValue = document.querySelector(".devUpgradeSecondValue");
     let devCostUpgradeValue = document.querySelector(".devCostUpgradeValue");
 
     let goldUpgradeBtn = document.querySelector(".goldUpgrade");
@@ -45,10 +48,10 @@ document.addEventListener("DOMContentLoaded", () => {
     let devUpgradeBtn = document.querySelector(".devUpgrade");
     let devCostUpgradeBtn = document.querySelector(".devCostUpgrade");
 
-    let moneyCount = 10;
-    let foodCount = 0;
-    let popCount = 0;
-    let devCount = 0;
+    let moneyCount = 1000000;
+    let foodCount = 1000000;
+    let popCount = 1000000;
+    let devCount = 1000000;
 
     let foodSellVal = 10;
     let foodBuyVal = 9;
@@ -113,8 +116,10 @@ document.addEventListener("DOMContentLoaded", () => {
         costUpgradeCost = JSON.parse(localStorage.getItem("costUpgradeCost"));
         costUpgradeSecondCost = JSON.parse(localStorage.getItem("costUpgradeSecondCost"));
 
-        popUpgradeCost = JSON.parse(localStorage.getItem("popUpgradeCost"));        
+        popUpgradeCost = JSON.parse(localStorage.getItem("popUpgradeCost")); 
+        popUpgradeSecondCost = JSON.parse(localStorage.getItem("popUpgradeSecondCost"));        
         popQtyUpgradeCost = JSON.parse(localStorage.getItem("popQtyUpgradeCost"));
+        popQtyUpgradeSecondCost = JSON.parse(localStorage.getItem("popQtyUpgradeSecondCost"));
 
         devUpgradeCost = JSON.parse(localStorage.getItem("devUpgradeCost"));        
         devCostUpgradeCost = JSON.parse(localStorage.getItem("devCostUpgradeCost"));
@@ -138,8 +143,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if(goldSpendVal === 0.01){
             devCostUpgradeValue.innerHTML = "MAX"} else {
-                devCostUpgradeValue.innerHTML = devCostUpgradeCost.toLocaleString() + " Gold";
+            devCostUpgradeValue.innerHTML = devCostUpgradeCost.toLocaleString() + " Gold";
             }
+
+        if(foodConsumeVal === 0.01){
+            popQtyUpgradeValue.innerHTML = "MAX"
+            popQtyUpgradeSecondValue.innerHTML = "MAX"} else {
+                popQtyUpgradeValue.innerHTML = popQtyUpgradeCost.toLocaleString() + " Gold";
+                popQtyUpgradeSecondValue.innerHTML = popQtyUpgradeSecondCost.toLocaleString() + " Dev";
+            }
+
 
         
         goldUpgradeValue.innerHTML = goldUpgradeCost.toLocaleString() + " Gold";
@@ -147,7 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
         qtyUpgradeSecondValue.innerHTML = qtyUpgradeSecondCost.toLocaleString() + " Pop";
         foodUpgradeValue.innerHTML = foodUpgradeCost.toLocaleString() + " Gold";
         popUpgradeValue.innerHTML = popUpgradeCost.toLocaleString() + " Gold";
-        popQtyUpgradeValue.innerHTML = popQtyUpgradeCost.toLocaleString() + " Gold";
+        popUpgradeSecondValue.innerHTML = popUpgradeSecondCost.toLocaleString() + " Dev";
         devUpgradeValue.innerHTML = devUpgradeCost.toLocaleString() + " Gold";
 
         alert("Data loaded!")}
@@ -181,7 +194,9 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.removeItem("costUpgradeCost");
 
         localStorage.removeItem("popUpgradeCost");
+        localStorage.removeItem("popUpgradeSecondCost");
         localStorage.removeItem("popQtyUpgradeCost");
+        localStorage.removeItem("popQtyUpgradeSecondCost");
 
         localStorage.removeItem("devUpgradeCost");
         localStorage.removeItem("devCostUpgradeCost");
@@ -218,7 +233,9 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("costUpgradeSecondCost", JSON.stringify(costUpgradeSecondCost));
 
         localStorage.setItem("popUpgradeCost", JSON.stringify(popUpgradeCost));
+        localStorage.setItem("popUpgradeSecondCost", JSON.stringify(popUpgradeSecondCost));
         localStorage.setItem("popQtyUpgradeCost", JSON.stringify(popQtyUpgradeCost));
+        localStorage.setItem("popQtyUpgradeSecondCost", JSON.stringify(popQtyUpgradeSecondCost));
 
         localStorage.setItem("devUpgradeCost", JSON.stringify(devUpgradeCost));
         localStorage.setItem("devCostUpgradeCost", JSON.stringify(devCostUpgradeCost));
@@ -286,8 +303,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let popUpgradeCost = 50;
     popUpgradeValue.innerHTML = popUpgradeCost.toLocaleString() + " Gold";
+    let popUpgradeSecondCost = 10;
+    popUpgradeSecondValue.innerHTML = popUpgradeSecondCost.toLocaleString() + " Dev";
     let popQtyUpgradeCost = 1000;
     popQtyUpgradeValue.innerHTML = popQtyUpgradeCost.toLocaleString() + " Gold";
+    let popQtyUpgradeSecondCost = 10;
+    popQtyUpgradeSecondValue.innerHTML = popQtyUpgradeSecondCost.toLocaleString() + " Dev";
 
     let devUpgradeCost = 50;
     devUpgradeValue.innerHTML = devUpgradeCost.toLocaleString() + " Gold";
@@ -335,14 +356,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function activatePopUpgrade () {
-        if(moneyCount - popUpgradeCost >= 0) {
+        if(moneyCount - popUpgradeCost >= 0 && devCount - popUpgradeSecondCost >= 0) {
             moneyCount -= popUpgradeCost;
             moneyCount = Number(moneyCount.toFixed(2));
+            devCount -= popUpgradeSecondCost;
+            devCount = Number(devCount.toFixed(2));
             popIncVal *= 1.5;
             popIncVal = Number(popIncVal.toFixed(2));
             popUpgradeCost *= 2;
+            popUpgradeSecondCost *= 2;
             moneyValue.innerHTML = moneyCount.toLocaleString();
             popUpgradeValue.innerHTML = popUpgradeCost.toLocaleString() + " Gold";
+            popUpgradeSecondValue.innerHTML = popUpgradeSecondCost.toLocaleString() + " Dev";
             exchangePopValue.innerHTML = `Increase Population by ${popIncVal.toLocaleString()} for ${foodConsumeVal.toLocaleString()} food`;        
         }
         else {alert("Not enough gold!")};
@@ -412,19 +437,25 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function activatePopQtyUpgrade () {
-        if(moneyCount - popQtyUpgradeCost >= 0 && foodConsumeVal !== 0.01){
+        if(moneyCount - popQtyUpgradeCost >= 0 && devCount - popQtyUpgradeSecondCost >= 0 && foodConsumeVal !== 0.01){
             moneyCount -= popQtyUpgradeCost;
             moneyCount = Number(moneyCount.toFixed(2));
+            devCount -= popQtyUpgradeSecondCost;
+            devCount = Number(devCount.toFixed(2));
             foodConsumeVal *= 0.5;
             foodConsumeVal = Number(foodConsumeVal.toFixed(2));
 
                 if(foodConsumeVal === 0.01){
                     popQtyUpgradeValue.innerHTML = "MAX"
+                    popQtyUpgradeSecondValue.innerHTML = "MAX"
                 } else {
                 popQtyUpgradeCost *= 2;
-                popQtyUpgradeValue.innerHTML= popQtyUpgradeCost.toLocaleString() + " Gold";}
+                popQtyUpgradeValue.innerHTML= popQtyUpgradeCost.toLocaleString() + " Gold";
+                popQtyUpgradeSecondCost *= 2;
+                popQtyUpgradeSecondValue.innerHTML= popQtyUpgradeSecondCost.toLocaleString() + " Dev";}
 
-            moneyValue.innerHTML = moneyCount.toLocaleString();;
+            moneyValue.innerHTML = moneyCount.toLocaleString();
+            devValue.innerHTML = devCount.toLocaleString();
             exchangePopValue.innerHTML = `Increase Population by ${popIncVal.toLocaleString()} for ${foodConsumeVal.toLocaleString()} food`;
         } else if(moneyCount - popQtyUpgradeCost >= 0 && foodConsumeVal === 0.01){
             alert("It can't get any cheaper!")
