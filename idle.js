@@ -35,6 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let devUpgradeValue = document.querySelector(".devUpgradeValue");
     let devUpgradeSecondValue = document.querySelector(".devUpgradeSecondValue");
     let devCostUpgradeValue = document.querySelector(".devCostUpgradeValue");
+    let devCostUpgradeSecondValue = document.querySelector(".devCostUpgradeSecondValue");
 
     let goldUpgradeBtn = document.querySelector(".goldUpgrade");
     let qtyUpgradeBtn = document.querySelector(".qtyUpgrade");
@@ -48,10 +49,10 @@ document.addEventListener("DOMContentLoaded", () => {
     let devUpgradeBtn = document.querySelector(".devUpgrade");
     let devCostUpgradeBtn = document.querySelector(".devCostUpgrade");
 
-    let moneyCount = 1000000;
-    let foodCount = 1000000;
-    let popCount = 1000000;
-    let devCount = 1000000;
+    let moneyCount = 10;
+    let foodCount = 0;
+    let popCount = 0;
+    let devCount = 0;
 
     let foodSellVal = 10;
     let foodBuyVal = 9;
@@ -124,6 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
         devUpgradeCost = JSON.parse(localStorage.getItem("devUpgradeCost")); 
         devUpgradeSecondCost = JSON.parse(localStorage.getItem("devUpgradeSecondCost"));               
         devCostUpgradeCost = JSON.parse(localStorage.getItem("devCostUpgradeCost"));
+        devCostUpgradeSecondCost = JSON.parse(localStorage.getItem("devCostUpgradeSecondCost"));
 
         moneyValue.innerHTML = moneyCount.toLocaleString();
         foodValue.innerHTML = foodCount.toLocaleString();
@@ -143,8 +145,10 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
         if(goldSpendVal === 0.01){
-            devCostUpgradeValue.innerHTML = "MAX"} else {
+            devCostUpgradeValue.innerHTML = "MAX"
+            devCostUpgradeSecondValue.innerHTML = "MAX"} else {
             devCostUpgradeValue.innerHTML = devCostUpgradeCost.toLocaleString() + " Gold";
+            devCostUpgradeSecondValue.innerHTML = devCostUpgradeSecondCost.toLocaleString() + " Pop";
             }
 
         if(foodConsumeVal === 0.01){
@@ -204,7 +208,7 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.removeItem("devUpgradeCost");
         localStorage.removeItem("devUpgradeSecondCost");
         localStorage.removeItem("devCostUpgradeCost");
-
+        localStorage.removeItem("devCostUpgradeSecondCost");
 
 
         alert("Data has been reset!");
@@ -244,6 +248,8 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("devUpgradeCost", JSON.stringify(devUpgradeCost));
         localStorage.setItem("devUpgradeSecondCost", JSON.stringify(devUpgradeSecondCost));
         localStorage.setItem("devCostUpgradeCost", JSON.stringify(devCostUpgradeCost));
+        localStorage.setItem("devCostUpgradeSecondCost", JSON.stringify(devCostUpgradeSecondCost));
+
 
         alert("Data has been saved!")
     }
@@ -296,14 +302,14 @@ document.addEventListener("DOMContentLoaded", () => {
     goldUpgradeValue.innerHTML = goldUpgradeCost.toLocaleString() + " Gold";
     let qtyUpgradeCost = 1000;
     qtyUpgradeValue.innerHTML = qtyUpgradeCost.toLocaleString() + " Gold";
-    let qtyUpgradeSecondCost = 10;
+    let qtyUpgradeSecondCost = 100;
     qtyUpgradeSecondValue.innerHTML = qtyUpgradeSecondCost.toLocaleString() + " Pop";
 
     let foodUpgradeCost = 50;
     foodUpgradeValue.innerHTML = foodUpgradeCost.toLocaleString() + " Gold";
     let costUpgradeCost = 1000;
     costUpgradeValue.innerHTML = costUpgradeCost.toLocaleString() + " Gold";
-    let costUpgradeSecondCost = 10;
+    let costUpgradeSecondCost = 100;
     costUpgradeSecondValue.innerHTML = costUpgradeSecondCost.toLocaleString() + " Dev"
 
     let popUpgradeCost = 50;
@@ -312,7 +318,7 @@ document.addEventListener("DOMContentLoaded", () => {
     popUpgradeSecondValue.innerHTML = popUpgradeSecondCost.toLocaleString() + " Dev";
     let popQtyUpgradeCost = 1000;
     popQtyUpgradeValue.innerHTML = popQtyUpgradeCost.toLocaleString() + " Gold";
-    let popQtyUpgradeSecondCost = 10;
+    let popQtyUpgradeSecondCost = 100;
     popQtyUpgradeSecondValue.innerHTML = popQtyUpgradeSecondCost.toLocaleString() + " Dev";
 
     let devUpgradeCost = 50;
@@ -321,6 +327,9 @@ document.addEventListener("DOMContentLoaded", () => {
     devUpgradeSecondValue.innerHTML = devUpgradeSecondCost.toLocaleString() + " Pop";
     let devCostUpgradeCost = 1000;
     devCostUpgradeValue.innerHTML = devCostUpgradeCost.toLocaleString() + " Gold";
+    let devCostUpgradeSecondCost = 100;
+    devCostUpgradeSecondValue.innerHTML = devCostUpgradeSecondCost.toLocaleString() + " Pop";
+
 
     goldUpgradeBtn.addEventListener("click", activateGoldUpgrade);
     qtyUpgradeBtn.addEventListener("click", activateQtyUpgrade);
@@ -470,11 +479,12 @@ document.addEventListener("DOMContentLoaded", () => {
             exchangePopValue.innerHTML = `Increase Population by ${popIncVal.toLocaleString()} for ${foodConsumeVal.toLocaleString()} food`;
         } else if(moneyCount - popQtyUpgradeCost >= 0 && foodConsumeVal === 0.01){
             alert("It can't get any cheaper!")
-        } else {alert("Not Enough Gold!")}
+        } else if (moneyCount - popQtyUpgradeCost <= 0) {alert("Not Enough Gold!")
+        }else if (devCount - popQtyUpgradeSecondCost <= 0) {alert("Not Enough Development!")}
     }
 
     function activateDevCostUpgrade () {
-        if(moneyCount - devCostUpgradeCost >= 0 && goldSpendVal !== 0.01){
+        if(moneyCount - devCostUpgradeCost >= 0 && popCount - devCostUpgradeSecondCost >= 0 && goldSpendVal !== 0.01){
             moneyCount -= devCostUpgradeCost;
             moneyCount = Number(moneyCount.toFixed(2));
             goldSpendVal *= 0.5;
@@ -482,16 +492,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 if(goldSpendVal === 0.01){
                     devCostUpgradeValue.innerHTML = "MAX"
+                    devCostUpgradeSecondValue.innerHTML = "MAX"
                 } else {
                     devCostUpgradeCost *= 2;
                     devCostUpgradeValue.innerHTML = devCostUpgradeCost.toLocaleString() + " Gold";
+                    devCostUpgradeSecondCost *= 2;
+                    devCostUpgradeSecondValue.innerHTML = devCostUpgradeSecondCost.toLocaleString() + " Pop";
+
                 }
             
             moneyValue.innerHTML = moneyCount.toLocaleString();;
             exchangeDevValue.innerHTML = `Increase Development by ${devIncVal.toLocaleString()} for ${goldSpendVal.toLocaleString()} gold`;
         } else if (moneyCount - devCostUpgradeCost >= 0 && goldSpendVal === 0.01){
             alert("It can't get any cheaper!");
-        } else {alert("Not enough Gold!")}
+        } else if (moneyCount - devCostUpgradeCost <= 0) {alert("Not Enough Gold!")
+        } else if (popCount - devCostUpgradeSecondCost <= 0) {alert("Not Enough Population!")}
     }
 
 
