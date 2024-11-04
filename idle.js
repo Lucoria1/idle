@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let devUpgradeBtn = document.querySelector(".devUpgrade");
     let devCostUpgradeBtn = document.querySelector(".devCostUpgrade");
 
-    let moneyCount = 10;
+    let moneyCount = 100000000;
     let foodCount = 0;
     let popCount = 0;
     let devCount = 0;
@@ -62,11 +62,11 @@ document.addEventListener("DOMContentLoaded", () => {
     let devIncVal = 1;
     let goldSpendVal = 10;
 
-    moneyValue.innerHTML = moneyCount;
+    moneyValue.innerHTML = moneyCount.toLocaleString();
 
-    exchangeMoneyValue.innerHTML = `Sell ${foodSellQty} food for ${foodSellVal} gold`;
-    exchangeFoodValue.innerHTML = `Buy ${foodBuyQty} food for ${foodBuyVal} gold`;
-    exchangePopValue.innerHTML = `Increase Population by ${popIncVal} for ${foodConsumeVal} food`;
+    exchangeMoneyValue.innerHTML = `Sell ${foodSellQty.toLocaleString()} food for ${foodSellVal.toLocaleString()} gold`;
+    exchangeFoodValue.innerHTML = `Buy ${foodBuyQty.toLocaleString()} food for ${foodBuyVal.toLocaleString()} gold`;
+    exchangePopValue.innerHTML = `Increase Population by ${popIncVal.toLocaleString()} for ${foodConsumeVal.toLocaleString()} food`;
     exchangeDevValue.innerHTML = `Increase Development by ${devIncVal} for ${goldSpendVal} gold`;
 
     resetBtn.addEventListener("click", resetData);
@@ -119,26 +119,36 @@ document.addEventListener("DOMContentLoaded", () => {
         devUpgradeCost = JSON.parse(localStorage.getItem("devUpgradeCost"));        
         devCostUpgradeCost = JSON.parse(localStorage.getItem("devCostUpgradeCost"));
 
-        moneyValue.innerHTML = moneyCount;
-        foodValue.innerHTML = foodCount;
-        popValue.innerHTML = popCount;
-        devValue.innerHTML = devCount;
+        moneyValue.innerHTML = moneyCount.toLocaleString();
+        foodValue.innerHTML = foodCount.toLocaleString();
+        popValue.innerHTML = popCount.toLocaleString();
+        devValue.innerHTML = devCount.toLocaleString();
 
-        exchangeMoneyValue.innerHTML = `Sell ${foodSellQty} food for ${foodSellVal} gold`;
-        exchangeFoodValue.innerHTML = `Buy ${foodBuyQty} food for ${foodBuyVal} gold`;
-        exchangePopValue.innerHTML = `Increase Population by ${popIncVal} for ${foodConsumeVal} food`;
-        exchangeDevValue.innerHTML = `Increase Development by ${devIncVal} for ${goldSpendVal} gold`;
+        exchangeMoneyValue.innerHTML = `Sell ${foodSellQty.toLocaleString()} food for ${foodSellVal.toLocaleString()} gold`;
+        exchangeFoodValue.innerHTML = `Buy ${foodBuyQty.toLocaleString()} food for ${foodBuyVal.toLocaleString()} gold`;
+        exchangePopValue.innerHTML = `Increase Population by ${popIncVal.toLocaleString()} for ${foodConsumeVal.toLocaleString()} food`;
+        exchangeDevValue.innerHTML = `Increase Development by ${devIncVal.toLocaleString()} for ${goldSpendVal.toLocaleString()} gold`;
     
-        goldUpgradeValue.innerHTML = goldUpgradeCost + " Gold";
-        qtyUpgradeValue.innerHTML = qtyUpgradeCost + " Gold";
-        qtyUpgradeSecondValue.innerHTML = qtyUpgradeSecondCost + " Pop";
-        foodUpgradeValue.innerHTML = foodUpgradeCost + " Gold";
-        costUpgradeValue.innerHTML = costUpgradeCost + " Gold";
-        costUpgradeSecondValue.innerHTML = costUpgradeSecondCost + " Dev";
-        popUpgradeValue.innerHTML = popUpgradeCost + " Gold";
-        popQtyUpgradeValue.innerHTML = popQtyUpgradeCost + " Gold";
-        devUpgradeValue.innerHTML = devUpgradeCost + " Gold";
-        devCostUpgradeValue.innerHTML = devCostUpgradeCost + " Gold";
+        if(foodBuyVal === 0.01){
+            costUpgradeValue.innerHTML = "MAX"
+            costUpgradeSecondValue.innerHTML = "MAX"} else {
+                costUpgradeValue.innerHTML = costUpgradeCost.toLocaleString() + " Gold";
+                costUpgradeSecondValue.innerHTML = costUpgradeSecondCost.toLocaleString() + " Dev";        
+            }
+
+        if(goldSpendVal === 0.01){
+            devCostUpgradeValue.innerHTML = "MAX"} else {
+                devCostUpgradeValue.innerHTML = devCostUpgradeCost.toLocaleString() + " Gold";
+            }
+
+        
+        goldUpgradeValue.innerHTML = goldUpgradeCost.toLocaleString() + " Gold";
+        qtyUpgradeValue.innerHTML = qtyUpgradeCost.toLocaleString() + " Gold";
+        qtyUpgradeSecondValue.innerHTML = qtyUpgradeSecondCost.toLocaleString() + " Pop";
+        foodUpgradeValue.innerHTML = foodUpgradeCost.toLocaleString() + " Gold";
+        popUpgradeValue.innerHTML = popUpgradeCost.toLocaleString() + " Gold";
+        popQtyUpgradeValue.innerHTML = popQtyUpgradeCost.toLocaleString() + " Gold";
+        devUpgradeValue.innerHTML = devUpgradeCost.toLocaleString() + " Gold";
 
         alert("Data loaded!")}
     }
@@ -220,10 +230,10 @@ document.addEventListener("DOMContentLoaded", () => {
         if(foodCount - foodSellQty >= 0){
         moneyCount += foodSellVal;
         moneyCount = Number(moneyCount.toFixed(2));
-        moneyValue.innerHTML = moneyCount;
+        moneyValue.innerHTML = moneyCount.toLocaleString();;
         foodCount -= foodSellQty;
         foodCount = Number(foodCount.toFixed(2));
-        foodValue.innerHTML = foodCount;}
+        foodValue.innerHTML = foodCount.toLocaleString();;}
         else{alert("Not enough food to sell!")}
     }
 
@@ -231,10 +241,10 @@ document.addEventListener("DOMContentLoaded", () => {
         if(moneyCount - foodBuyVal >= 0){
         foodCount += foodBuyQty;
         foodCount = Number(foodCount.toFixed(2));
-        foodValue.innerHTML = foodCount;
+        foodValue.innerHTML = foodCount.toLocaleString();;
         moneyCount -= foodBuyVal;
         moneyCount = Number(moneyCount.toFixed(2));
-        moneyValue.innerHTML = moneyCount;}
+        moneyValue.innerHTML = moneyCount.toLocaleString();;}
         else{alert("Not enough gold to buy food!")}
     }
 
@@ -242,10 +252,10 @@ document.addEventListener("DOMContentLoaded", () => {
         if(foodCount - foodConsumeVal >= 0){
         popCount += popIncVal;
         popCount = Number(popCount.toFixed(2));
-        popValue.innerHTML = popCount;
+        popValue.innerHTML = popCount.toLocaleString();;
         foodCount -= foodConsumeVal;
         foodCount = Number(foodCount.toFixed(2));
-        foodValue.innerHTML = foodCount;}
+        foodValue.innerHTML = foodCount.toLocaleString();;}
         else{alert("Not enough food for the people!")}
     }
 
@@ -253,36 +263,36 @@ document.addEventListener("DOMContentLoaded", () => {
         if(moneyCount - goldSpendVal >= 0){
         devCount += devIncVal;
         devCount = Number(devCount.toFixed(2));
-        devValue.innerHTML = devCount;
+        devValue.innerHTML = devCount.toLocaleString();;
         moneyCount -= goldSpendVal;
         moneyCount = Number(moneyCount.toFixed(2));
-        moneyValue.innerHTML = moneyCount;}
+        moneyValue.innerHTML = moneyCount.toLocaleString();;}
         else{alert("Not enough gold to increase development!")};
     }
 
     let goldUpgradeCost = 50;
-    goldUpgradeValue.innerHTML = goldUpgradeCost + " Gold";
+    goldUpgradeValue.innerHTML = goldUpgradeCost.toLocaleString() + " Gold";
     let qtyUpgradeCost = 1000;
-    qtyUpgradeValue.innerHTML = qtyUpgradeCost + " Gold";
+    qtyUpgradeValue.innerHTML = qtyUpgradeCost.toLocaleString() + " Gold";
     let qtyUpgradeSecondCost = 10;
-    qtyUpgradeSecondValue.innerHTML = qtyUpgradeSecondCost + " Pop";
+    qtyUpgradeSecondValue.innerHTML = qtyUpgradeSecondCost.toLocaleString() + " Pop";
 
     let foodUpgradeCost = 50;
-    foodUpgradeValue.innerHTML = foodUpgradeCost + " Gold";
+    foodUpgradeValue.innerHTML = foodUpgradeCost.toLocaleString() + " Gold";
     let costUpgradeCost = 1000;
-    costUpgradeValue.innerHTML = costUpgradeCost + " Gold";
+    costUpgradeValue.innerHTML = costUpgradeCost.toLocaleString() + " Gold";
     let costUpgradeSecondCost = 10;
-    costUpgradeSecondValue.innerHTML = costUpgradeSecondCost + " Dev"
+    costUpgradeSecondValue.innerHTML = costUpgradeSecondCost.toLocaleString() + " Dev"
 
     let popUpgradeCost = 50;
-    popUpgradeValue.innerHTML = popUpgradeCost + " Gold";
+    popUpgradeValue.innerHTML = popUpgradeCost.toLocaleString() + " Gold";
     let popQtyUpgradeCost = 1000;
-    popQtyUpgradeValue.innerHTML = popQtyUpgradeCost + " Gold";
+    popQtyUpgradeValue.innerHTML = popQtyUpgradeCost.toLocaleString() + " Gold";
 
     let devUpgradeCost = 50;
-    devUpgradeValue.innerHTML = devUpgradeCost + " Gold";
+    devUpgradeValue.innerHTML = devUpgradeCost.toLocaleString() + " Gold";
     let devCostUpgradeCost = 1000;
-    devCostUpgradeValue.innerHTML = devCostUpgradeCost + " Gold";
+    devCostUpgradeValue.innerHTML = devCostUpgradeCost.toLocaleString() + " Gold";
 
     goldUpgradeBtn.addEventListener("click", activateGoldUpgrade);
     qtyUpgradeBtn.addEventListener("click", activateQtyUpgrade);
@@ -303,9 +313,9 @@ document.addEventListener("DOMContentLoaded", () => {
             foodSellVal *= 1.5;
             foodSellVal = Number(foodSellVal.toFixed(2));
             goldUpgradeCost *= 2;
-            moneyValue.innerHTML = moneyCount;
-            goldUpgradeValue.innerHTML = goldUpgradeCost + " Gold";
-            exchangeMoneyValue.innerHTML = `Sell ${foodSellQty} food for ${foodSellVal} gold`;
+            moneyValue.innerHTML = moneyCount.toLocaleString();;
+            goldUpgradeValue.innerHTML = goldUpgradeCost.toLocaleString() + " Gold";
+            exchangeMoneyValue.innerHTML = `Sell ${foodSellQty.toLocaleString()} food for ${foodSellVal.toLocaleString()} gold`;
         }
         else {alert("Not enough gold!")};
     }
@@ -317,9 +327,9 @@ document.addEventListener("DOMContentLoaded", () => {
             foodBuyQty *= 1.5;
             foodBuyQty = Number(foodBuyQty.toFixed(2));            
             foodUpgradeCost *= 2;
-            moneyValue.innerHTML = moneyCount;
-            foodUpgradeValue.innerHTML = foodUpgradeCost + " Gold";
-            exchangeFoodValue.innerHTML = `Buy ${foodBuyQty} food for ${foodBuyVal} gold`;
+            moneyValue.innerHTML = moneyCount.toLocaleString();;
+            foodUpgradeValue.innerHTML = foodUpgradeCost.toLocaleString() + " Gold";
+            exchangeFoodValue.innerHTML = `Buy ${foodBuyQty.toLocaleString()} food for ${foodBuyVal.toLocaleString()} gold`;
         }
         else {alert("Not enough gold!")};
     }
@@ -331,9 +341,9 @@ document.addEventListener("DOMContentLoaded", () => {
             popIncVal *= 1.5;
             popIncVal = Number(popIncVal.toFixed(2));
             popUpgradeCost *= 2;
-            moneyValue.innerHTML = moneyCount;
-            popUpgradeValue.innerHTML = popUpgradeCost + " Gold";
-            exchangePopValue.innerHTML = `Increase Population by ${popIncVal} for ${foodConsumeVal} food`;        
+            moneyValue.innerHTML = moneyCount.toLocaleString();
+            popUpgradeValue.innerHTML = popUpgradeCost.toLocaleString() + " Gold";
+            exchangePopValue.innerHTML = `Increase Population by ${popIncVal.toLocaleString()} for ${foodConsumeVal.toLocaleString()} food`;        
         }
         else {alert("Not enough gold!")};
     }
@@ -345,9 +355,9 @@ document.addEventListener("DOMContentLoaded", () => {
             devIncVal *= 1.5;
             devIncVal = Number(devIncVal.toFixed(2));
             devUpgradeCost *= 2;
-            moneyValue.innerHTML = moneyCount;
-            devUpgradeValue.innerHTML = devUpgradeCost + " Gold";
-            exchangeDevValue.innerHTML = `Increase Development by ${devIncVal} for ${goldSpendVal} gold`;
+            moneyValue.innerHTML = moneyCount.toLocaleString();;
+            devUpgradeValue.innerHTML = devUpgradeCost.toLocaleString() + " Gold";
+            exchangeDevValue.innerHTML = `Increase Development by ${devIncVal.toLocaleString()} for ${goldSpendVal.toLocaleString()} gold`;
         }
         else {alert("Not enough gold!")};
     }
@@ -362,10 +372,10 @@ document.addEventListener("DOMContentLoaded", () => {
             foodSellVal = Number(foodSellVal.toFixed(2));
             qtyUpgradeCost *= 2;
             qtyUpgradeSecondCost *= 2;
-            moneyValue.innerHTML = moneyCount;
-            qtyUpgradeValue.innerHTML = qtyUpgradeCost + " Gold";
-            qtyUpgradeSecondValue.innerHTML = qtyUpgradeSecondCost + " Pop";
-            exchangeMoneyValue.innerHTML = `Sell ${foodSellQty} food for ${foodSellVal} gold`;
+            moneyValue.innerHTML = moneyCount.toLocaleString();;
+            qtyUpgradeValue.innerHTML = qtyUpgradeCost.toLocaleString() + " Gold";
+            qtyUpgradeSecondValue.innerHTML = qtyUpgradeSecondCost.toLocaleString() + " Pop";
+            exchangeMoneyValue.innerHTML = `Sell ${foodSellQty.toLocaleString()} food for ${foodSellVal.toLocaleString()} gold`;
         }
         else if (moneyCount - qtyUpgradeCost <= 0){alert("Not Enough Gold!")}
         else if (popCount - qtyUpgradeSecondCost <= 0){alert("Not Enough Population!")}
@@ -375,23 +385,25 @@ document.addEventListener("DOMContentLoaded", () => {
     function activateCostUpgrade () {
         if(moneyCount - costUpgradeCost >= 0 && devCount - costUpgradeSecondCost >= 0 &&foodBuyVal !== 0.01){
             moneyCount -= costUpgradeCost;
-            devCount -= costUpgradeSecondCost;
             moneyCount = Number(moneyCount.toFixed(2));
+            devCount -= costUpgradeSecondCost;
+            devCount = Number(devCount.toFixed(2));
             foodBuyVal *= 0.5;
             foodBuyVal = Number(foodBuyVal.toFixed(2));
 
                 if(foodBuyVal === 0.01){
                     costUpgradeValue.innerHTML = "MAX"
+                    costUpgradeSecondValue.innerHTML = "MAX"
                 } else {
                 costUpgradeCost *= 2;
                 costUpgradeSecondCost *= 2;
-                costUpgradeValue.innerHTML = costUpgradeCost + " Gold";
-                costUpgradeSecondValue.innerHTML = costUpgradeSecondCost + " Dev";
-                devValue.innerHTML = devCount;
+                costUpgradeValue.innerHTML = costUpgradeCost.toLocaleString() + " Gold";
+                costUpgradeSecondValue.innerHTML = costUpgradeSecondCost.toLocaleString() + " Dev";
+                devValue.innerHTML = devCount.toLocaleString();;
             }
 
-            moneyValue.innerHTML = moneyCount;
-            exchangeFoodValue.innerHTML = `Buy ${foodBuyQty} food for ${foodBuyVal} gold`;
+            moneyValue.innerHTML = moneyCount.toLocaleString();;
+            exchangeFoodValue.innerHTML = `Buy ${foodBuyQty.toLocaleString()} food for ${foodBuyVal.toLocaleString()} gold`;
         } else if (moneyCount - costUpgradeCost >=0 && foodBuyVal === 0.01) {
             alert("It can't get any cheaper!")
         }
@@ -410,10 +422,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     popQtyUpgradeValue.innerHTML = "MAX"
                 } else {
                 popQtyUpgradeCost *= 2;
-                popQtyUpgradeValue.innerHTML= popQtyUpgradeCost + " Gold";}
+                popQtyUpgradeValue.innerHTML= popQtyUpgradeCost.toLocaleString() + " Gold";}
 
-            moneyValue.innerHTML = moneyCount;
-            exchangePopValue.innerHTML = `Increase Population by ${popIncVal} for ${foodConsumeVal} food`;
+            moneyValue.innerHTML = moneyCount.toLocaleString();;
+            exchangePopValue.innerHTML = `Increase Population by ${popIncVal.toLocaleString()} for ${foodConsumeVal.toLocaleString()} food`;
         } else if(moneyCount - popQtyUpgradeCost >= 0 && foodConsumeVal === 0.01){
             alert("It can't get any cheaper!")
         } else {alert("Not Enough Gold!")}
@@ -430,11 +442,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     devCostUpgradeValue.innerHTML = "MAX"
                 } else {
                     devCostUpgradeCost *= 2;
-                    devCostUpgradeValue.innerHTML = devCostUpgradeCost + " Gold";
+                    devCostUpgradeValue.innerHTML = devCostUpgradeCost.toLocaleString() + " Gold";
                 }
             
-            moneyValue.innerHTML = moneyCount;
-            exchangeDevValue.innerHTML = `Increase Development by ${devIncVal} for ${goldSpendVal} gold`;
+            moneyValue.innerHTML = moneyCount.toLocaleString();;
+            exchangeDevValue.innerHTML = `Increase Development by ${devIncVal.toLocaleString()} for ${goldSpendVal.toLocaleString()} gold`;
         } else if (moneyCount - devCostUpgradeCost >= 0 && goldSpendVal === 0.01){
             alert("It can't get any cheaper!");
         } else {alert("Not enough Gold!")}
