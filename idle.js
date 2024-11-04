@@ -121,7 +121,8 @@ document.addEventListener("DOMContentLoaded", () => {
         popQtyUpgradeCost = JSON.parse(localStorage.getItem("popQtyUpgradeCost"));
         popQtyUpgradeSecondCost = JSON.parse(localStorage.getItem("popQtyUpgradeSecondCost"));
 
-        devUpgradeCost = JSON.parse(localStorage.getItem("devUpgradeCost"));        
+        devUpgradeCost = JSON.parse(localStorage.getItem("devUpgradeCost")); 
+        devUpgradeSecondCost = JSON.parse(localStorage.getItem("devUpgradeSecondCost"));               
         devCostUpgradeCost = JSON.parse(localStorage.getItem("devCostUpgradeCost"));
 
         moneyValue.innerHTML = moneyCount.toLocaleString();
@@ -162,6 +163,8 @@ document.addEventListener("DOMContentLoaded", () => {
         popUpgradeValue.innerHTML = popUpgradeCost.toLocaleString() + " Gold";
         popUpgradeSecondValue.innerHTML = popUpgradeSecondCost.toLocaleString() + " Dev";
         devUpgradeValue.innerHTML = devUpgradeCost.toLocaleString() + " Gold";
+        devUpgradeSecondValue.innerHTML = devUpgradeSecondCost.toLocaleString() + " Pop";
+
 
         alert("Data loaded!")}
     }
@@ -199,6 +202,7 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.removeItem("popQtyUpgradeSecondCost");
 
         localStorage.removeItem("devUpgradeCost");
+        localStorage.removeItem("devUpgradeSecondCost");
         localStorage.removeItem("devCostUpgradeCost");
 
 
@@ -238,6 +242,7 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("popQtyUpgradeSecondCost", JSON.stringify(popQtyUpgradeSecondCost));
 
         localStorage.setItem("devUpgradeCost", JSON.stringify(devUpgradeCost));
+        localStorage.setItem("devUpgradeSecondCost", JSON.stringify(devUpgradeSecondCost));
         localStorage.setItem("devCostUpgradeCost", JSON.stringify(devCostUpgradeCost));
 
         alert("Data has been saved!")
@@ -312,6 +317,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let devUpgradeCost = 50;
     devUpgradeValue.innerHTML = devUpgradeCost.toLocaleString() + " Gold";
+    let devUpgradeSecondCost = 10;
+    devUpgradeSecondValue.innerHTML = devUpgradeSecondCost.toLocaleString() + " Pop";
     let devCostUpgradeCost = 1000;
     devCostUpgradeValue.innerHTML = devCostUpgradeCost.toLocaleString() + " Gold";
 
@@ -370,21 +377,25 @@ document.addEventListener("DOMContentLoaded", () => {
             popUpgradeSecondValue.innerHTML = popUpgradeSecondCost.toLocaleString() + " Dev";
             exchangePopValue.innerHTML = `Increase Population by ${popIncVal.toLocaleString()} for ${foodConsumeVal.toLocaleString()} food`;        
         }
-        else {alert("Not enough gold!")};
+        else if(moneyCount - popUpgradeCost <= 0) {alert("Not enough gold!")}
+        else if (devCount - popUpgradeSecondCost <= 0) {alert("Not enough Development!")};
     }
 
     function activateDevUpgrade () {
-        if(moneyCount - devUpgradeCost >= 0) {
+        if(moneyCount - devUpgradeCost >= 0 && popCount - devUpgradeSecondCost >= 0) {
             moneyCount -= devUpgradeCost;
             moneyCount = Number(moneyCount.toFixed(2));
             devIncVal *= 1.5;
             devIncVal = Number(devIncVal.toFixed(2));
             devUpgradeCost *= 2;
+            devUpgradeSecondCost *= 2;
             moneyValue.innerHTML = moneyCount.toLocaleString();;
             devUpgradeValue.innerHTML = devUpgradeCost.toLocaleString() + " Gold";
+            devUpgradeSecondValue.innerHTML = devUpgradeSecondCost.toLocaleString() + " Pop";
             exchangeDevValue.innerHTML = `Increase Development by ${devIncVal.toLocaleString()} for ${goldSpendVal.toLocaleString()} gold`;
         }
-        else {alert("Not enough gold!")};
+        else if (moneyCount - devUpgradeCost <= 0){alert("Not enough gold!")}
+        else if(popCount - devUpgradeSecondCost <= 0) {alert("Not enough Population!")}
     }
 
     function activateQtyUpgrade () {
