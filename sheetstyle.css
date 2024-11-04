@@ -50,7 +50,9 @@
 
 .upgradeValCont {
     display: flex;
+    flex-direction: column;
     justify-content: space-evenly;
+    text-align: center;
 }
 
 .upgradeBtnCont {
@@ -67,4 +69,22 @@
 .dataBtns {
     display: flex;
     justify-content: flex-end;
+}
+
+.upgradeUnitCont {
+    display: flex;
+    justify-content: center;
+}
+
+.name {
+    margin: 10px;
+    font-size: 120%;
+}
+
+.tag {
+    margin: 10px;
+}
+
+.value {
+    margin: 10px;
 }
