@@ -63,3 +63,8 @@
 .exchangeCont {
     height: 80px;
 }
+
+.dataBtns {
+    display: flex;
+    justify-content: flex-end;
+}
