@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let devUpgradeBtn = document.querySelector(".devUpgrade");
     let devCostUpgradeBtn = document.querySelector(".devCostUpgrade");
 
-    let moneyCount = 100000000;
+    let moneyCount = 10;
     let foodCount = 0;
     let popCount = 0;
     let devCount = 0;
